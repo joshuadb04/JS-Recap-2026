@@ -43,7 +43,9 @@ for (let todo of todoList) {
 
   label.htmlFor = `todo-${todo.id}`;
   label.innerText = todo.task;
+
   li.insertAdjacentElement('beforeend', input);
   li.insertAdjacentElement('beforeend', label);
+
   ul.insertAdjacentElement('beforeend', li);
 }
