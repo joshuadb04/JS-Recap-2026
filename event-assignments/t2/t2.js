@@ -772,21 +772,6 @@ const restaurants = [
 
 // your code here
 
-/*
-  {
-    location: {type: 'Point', coordinates: [24.829696, 60.188222]},
-    _id: '6470d857a7309cc578e0180b',
-    companyId: 86,
-    name: 'Ravintola Aalto Kvarkki ',
-    address: 'Otakaari 3',
-    postalCode: '02150',
-    city: 'Espoo',
-    phone: 'Keittiö puh.+358505336952',
-    company: 'Sodexo',
-    __v: 0,
-  }
-*/
-
 console.log('restaurants', restaurants);
 
 const table = document.querySelector('table');
@@ -795,13 +780,12 @@ console.log('table', table);
 
 console.log('first before', restaurants[0]);
 
-restaurants.sort((a, b) => a.name.localeCompare(b.name));
+restaurants.sort((a, b) => a.name.localeCompare(b.name)); // another way to sort
 
 console.log('first after', restaurants[0]);
 
 for (const restaurant of restaurants) {
   const tr = document.createElement('tr');
-
   const td1 = document.createElement('td');
   const td2 = document.createElement('td');
 
@@ -822,14 +806,13 @@ for (const restaurant of restaurants) {
 
     dialog.innerHTML = `
     Restaurant name: ${restaurant.name}<br />
-Address: <br />
-Postal code: <br />
-City: <br />
-Phone number: <br />
-Company: <br />
+    Address: ${restaurant.address}<br />
+    Postal code: ${restaurant.postalCode}<br />
+    City: ${restaurant.city}<br />
+    Phone number: ${restaurant.phone}<br />
+    Company: ${restaurant.company}<br />
 
-<button>Close</button>
-`;
+    <button>Close</button>`;
 
     dialog.querySelector('button').addEventListener('click', () => {
       dialog.close();
