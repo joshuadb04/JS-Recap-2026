@@ -798,7 +798,7 @@ for (const restaurant of restaurants) {
   tr.addEventListener('click', () => {
     document
       .querySelectorAll('.highlight')
-      .forEach(element => element.classList.remove('highlight'));
+      .forEach(element => element.classList.remove('highlight')); //used to add and remove highlights per selection (to be further studied).
 
     tr.classList.add('highlight');
 

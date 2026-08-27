@@ -29,9 +29,8 @@ const todoList = [
 
 // add your code here
 
-const ul = document.querySelector('ul');
-
 for (let todo of todoList) {
+  const ul = document.querySelector('ul');
   const li = document.createElement('li'); //same setup from DOM t2
   const input = document.createElement('input');
   const button = document.createElement('button');
@@ -89,7 +88,8 @@ addButton.addEventListener('click', () => {
 
   const dialog = document.querySelector('dialog');
   const form = document.querySelector('dialog form'); // "dialog form" means find element form in element dialog, but using only "form" is fine if the document has only one form element.
-  const li = document.createElement('li'); // re-added these, otherwise some functions wont work.
+  const li = document.createElement('li'); // re-added these, otherwise some functions (that i added) wont work.
+  const ul = document.querySelector('ul'); //
   const input = document.createElement('input'); //
   const label = document.createElement('label'); //
   const button = document.createElement('button'); //
