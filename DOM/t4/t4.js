@@ -771,3 +771,33 @@ const restaurants = [
 ];
 
 // your code here
+navigator.geolocation.getCurrentPosition(position => {
+  const x1 = position.coords.longitude;
+  const y1 = position.coords.latitude;
+
+  const distance = restaurant => {
+    const x2 = restaurant.location.coordinates[0];
+    const y2 = restaurant.location.coordinates[1];
+
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  };
+
+  restaurants.sort((a, b) => distance(a) - distance(b));
+
+  const table = document.querySelector('table');
+
+  restaurants.forEach(restaurant => {
+    const row = document.createElement('tr');
+
+    const name = document.createElement('td');
+    name.textContent = restaurant.name;
+
+    const address = document.createElement('td');
+    address.textContent = restaurant.address;
+
+    row.appendChild(name);
+    row.appendChild(address);
+
+    table.appendChild(row);
+  });
+});
