@@ -1,9 +1,14 @@
 import { fetchData } from "../t4/t4.js";
 
 const apiURL = "https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants";
-
-const restaurants = await fetchData(apiURL);
 const table = document.querySelector("table");
+let restaurants;
+try {
+  restaurants = await fetchData(apiURL);
+} catch (error) {
+  console.log(error.message);
+}
+restaurants.sort((a, b) => a.name.localeCompare(b.name));
 
 for (const restaurant of restaurants) {
   const tr = document.createElement("tr");
@@ -18,18 +23,23 @@ for (const restaurant of restaurants) {
 
   tr.addEventListener("click", async () => {
     document.querySelectorAll(".highlight").forEach((element) => element.classList.remove("highlight")); //used to add and remove highlights per selection (to be further studied).
-
     tr.classList.add("highlight");
 
     const dialog = document.querySelector("dialog");
     const dayMenuURL = `https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants/daily/${restaurant._id}/en`;
-    const dayMenu = await fetchData(dayMenuURL);
+    let dayMenu;
+    try {
+      dayMenu = await fetchData(dayMenuURL);
+    } catch (error) {
+      console.log(error.message);
+    }
+
     const dailyMenu = dayMenu.courses
       .map(
         (i) =>
           `<div class="meal">
         Name: ${i.name}<br />
-        Diets: ${i.diets.length === 0 ? "Not available" : i.diets}<br />
+        Diets: ${!i.diets || i.diets.length === 0 ? "Not available" : i.diets}<br />
         Price: ${i.price === "" ? "Unspecified" : i.price}
         </div>`,
       )
